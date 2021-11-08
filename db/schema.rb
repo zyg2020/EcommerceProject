@@ -10,12 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_08_182440) do
+ActiveRecord::Schema.define(version: 2021_11_08_183310) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "username"
+    t.string "password"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.integer "province_id", null: false
+    t.string "postal_code"
+    t.string "telephone"
+    t.string "country"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -33,4 +50,5 @@ ActiveRecord::Schema.define(version: 2021_11_08_182440) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "customers", "provinces"
 end
