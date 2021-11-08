@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @order.customer_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @order.status_id %>
+</p>
+
+<p>
+  <strong>Province tax rate:</strong>
+  <%= @order.province_tax_rate %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>
