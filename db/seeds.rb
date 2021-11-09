@@ -13,6 +13,7 @@ OrderProduct.delete_all
 Product.delete_all
 Order.delete_all
 Status.delete_all
+User.delete_all
 Customer.delete_all
 Province.delete_all
 Category.delete_all

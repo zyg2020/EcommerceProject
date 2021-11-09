@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_08_212751) do
+ActiveRecord::Schema.define(version: 2021_11_08_215135) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -103,7 +103,16 @@ ActiveRecord::Schema.define(version: 2021_11_08_212751) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.integer "province_id", null: false
+    t.string "postal_code"
+    t.string "telephone"
+    t.string "country"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["province_id"], name: "index_users_on_province_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -114,4 +123,5 @@ ActiveRecord::Schema.define(version: 2021_11_08_212751) do
   add_foreign_key "orders", "statuses"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
+  add_foreign_key "users", "provinces"
 end
