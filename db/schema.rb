@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_09_015849) do
+ActiveRecord::Schema.define(version: 2021_11_09_041328) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -78,8 +78,10 @@ ActiveRecord::Schema.define(version: 2021_11_09_015849) do
     t.decimal "province_tax_rate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["status_id"], name: "index_orders_on_status_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -147,6 +149,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_015849) do
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "statuses"
+  add_foreign_key "orders", "users"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
   add_foreign_key "users", "provinces"

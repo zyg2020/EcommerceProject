@@ -51,7 +51,8 @@
     <%= f.text_field :city, autofocus: true, autocomplete: "city" %>
   </div>
 
-
+    <%= f.label :province, class: ""%>
+    <%= f.collection_select( :province, return_provinces , :id, :name)%>
 
     <div class="field">
     <%= f.label :postal_code %><br />
@@ -72,13 +73,7 @@
     <%= f.submit "Update" %>
   </div>
 
-<script>
-    document.getElementsByClassName("actions")[0].addEventListener("click", function (event) {
-        event.preventDefault();
-        document.getElementsByClassName("select")[0].value = parseInt(document.getElementsByClassName("select")[0].value)
-        document.getElementsByTagName("form")[0].submit();
-    });
-</script>
+
 
 <% end %>
 

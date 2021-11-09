@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
 
   belongs_to :province
+  has_many :orders
   # has_one :province, dependent: :destroy
   # accepts_nested_attributes_for :province
 
