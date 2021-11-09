@@ -56,3 +56,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+
+gem 'activeadmin' # Admin Dashboard as a Rails Engine
+gem 'devise'  #Provides username and password authentication libraries
