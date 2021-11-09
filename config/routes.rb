@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/login"
+  get "sessions/welcome"
   resources :order_products
   resources :product_categories
   resources :products
@@ -8,5 +12,11 @@ Rails.application.routes.draw do
   resources :provinces
   resources :categories
   resources :pages
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  root "sessions#welcome"
+
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  post "/logout", to: "sessions#destroy"
+  get "/welcome", to: "sessions#welcome"
 end
