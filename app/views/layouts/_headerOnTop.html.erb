@@ -1,0 +1,39 @@
+      <div>
+        <nav class="navbar" role="navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://bulma.io">
+                    <img src="https://www.purpicks.com/wp-content/uploads/2018/06/Rejuva-Minerals-Multi-Purpose-Powder-Blush-_-Eye-1.jpg" alt="logo" width="50" height="50" />
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <%= link_to "Products", products_path, class:"navbar-item " %>
+                    <%= link_to "Categories", categories_path, class:"navbar-item " %>
+                    <%= link_to "Orders", orders_path, class:"navbar-item " %>
+
+                </div>
+
+
+                <div class="navbar-end">
+                  <div class="navbar-item buttons">
+
+                  <% if logged_in? %>
+                    <h2>Hello, <%= current_user.username %></h2>
+
+                    <%= button_to "Sign Out", '/logout', method: :post, class: "button  ml-2" %>
+                    <% else %>
+                    <%= button_to "Login", '/login', method: :get, class: "button"  %>
+                    <%= button_to "Sign Up", '/customers/new', method: :get, class: "button is-primary ml-2"  %>
+                    <% end %>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
