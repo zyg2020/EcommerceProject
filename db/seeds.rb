@@ -63,3 +63,4 @@ puts "Created #{Page.count} Pages"
 puts "Created #{Product.count} Products"
 puts "Created #{Category.count} Categories"
 puts "Created #{Province.count} Provinces"
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
