@@ -20,5 +20,15 @@
   <%= @product.previous_price %>
 </p>
 
+    <% if @product.image.present? %>
+    <p>IMAGE! 📸</p>
+      <div class="card-image">
+        <figure class="image">
+        <%= image_tag @product.image %>
+        </figure>
+      </div>
+    <% end %>
+
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
