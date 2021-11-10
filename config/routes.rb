@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   resources :customers
   resources :provinces
   resources :categories
-  resources :pages
+  resources :pages, except: [:show]
+  get "/pages/:permalink" => "pages#permalink", as: "permalink"
 
   root "sessions#welcome"
 
