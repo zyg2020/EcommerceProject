@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+require "faker"
 require "csv"
 
 ProductCategory.delete_all
@@ -37,6 +37,12 @@ products.each do |p|
       category = Category.find_or_create_by(name: category_name)
       ProductCategory.create(product: product, category: category)
     end
+
+    downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{Faker::Commerce.unique.product_name}")
+    product.image.attach(io: downloaded_image, filename: "m-#{[product.name,
+                                                               product.id].join('-')}.jpg")
+    sleep(1) # <=== if youre downloading A LOT of images,
+
   else
     puts "Invalid product #{p['name']}"
   end
