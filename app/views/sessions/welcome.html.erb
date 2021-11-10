@@ -1,8 +1,11 @@
 <h1>Welcome</h1>
-
+<%= debug session[:user_id] %>
+<%= debug current_user %>
 <% if logged_in? %>
   <p>You are Logged In, <%= current_user.username %> </p>
+  <%= button_to "Sign Out", '/logout', method: :post %>
+<% else %>
+  <%= button_to "Login", '/login', method: :get %>
+  <%= button_to "Sign Up", '/customers/new', method: :get %>
 <% end %>
 
-<%= button_to "Login", '/login', method: :get %>
-<%= button_to "Sign Up", '/customers/new', method: :get %>

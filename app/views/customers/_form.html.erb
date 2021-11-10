@@ -17,10 +17,9 @@
   </div>
 
   <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
+    <%= form.label :password %><br />
+    <%= form.password_field :password, autocomplete: "new-password" %>
   </div>
-
   <div class="field">
     <%= form.label :first_name %>
     <%= form.text_field :first_name %>
@@ -42,8 +41,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :province_id %>
-    <%= form.text_field :province_id %>
+    <%= form.label :province_id, class: ""%>
+    <%= form.collection_select( :province_id, return_provinces , :id, :name)%>
   </div>
 
   <div class="field">

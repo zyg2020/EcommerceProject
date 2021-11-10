@@ -53,6 +53,13 @@ Page.create(
   permalink: "contact"
 )
 
+Province.create(
+  name: "Manitoba",
+  PST:  0.07,
+  GST:  0.05
+)
+
 puts "Created #{Page.count} Pages"
 puts "Created #{Product.count} Products"
 puts "Created #{Category.count} Categories"
+puts "Created #{Province.count} Provinces"
