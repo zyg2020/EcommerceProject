@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/login"
-  get "sessions/welcome"
+  # get "sessions/new"
+  # get "sessions/create"
+  # get "sessions/login"
+  # get "sessions/welcome"
   resources :order_products
   resources :product_categories
-  resources :products
+  resources :products do
+    collection do
+      get "new_products"
+      get "on_sale"
+      get "recently_updated"
+    end
+  end
   resources :orders
   resources :statuses
   resources :customers

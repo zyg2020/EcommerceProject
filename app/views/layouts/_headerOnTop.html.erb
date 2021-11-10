@@ -14,6 +14,9 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
+                    <%= link_to "New Products", new_products_products_path, class:"navbar-item" %>
+                    <%= link_to "On Sale", on_sale_products_path, class:"navbar-item" %>
+                    <%= link_to "Recently Update", recently_updated_products_path, class:"navbar-item" %>
                     <%= link_to "Products", products_path, class:"navbar-item " %>
                     <%= link_to "Categories", categories_path, class:"navbar-item " %>
                     <%= link_to "Orders", orders_path, class:"navbar-item " %>

@@ -1,14 +1,29 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products or /products.json
+  # products_path
   def index
     @products = Product.all
   end
 
-  # GET /products/1 or /products/1.json
-  def show
+  # new_products_products_path
+  def new_products
+    @products = Product.where("created_at > ?", 2.days.ago)
   end
+
+  # recently_updated_products_path
+  def recently_updated
+    @products = Product.where("updated_at > ?", 2.days.ago)
+  end
+
+  # on_sale_products_path
+  def on_sale
+    @products = Product.where.not(previous_price: nil)
+  end
+
+  # GET /products/1 or /products/1.json
+  def show; end
 
   # GET /products/new
   def new
@@ -16,8 +31,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /products or /products.json
   def create
@@ -57,13 +71,14 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:name, :description, :price, :previous_price)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.require(:product).permit(:name, :description, :price, :previous_price)
+  end
 end
