@@ -9,12 +9,12 @@ class ProductsController < ApplicationController
 
   # new_products_products_path
   def new_products
-    @products = Product.where("created_at > ?", 2.days.ago)
+    @products = Product.where("created_at > ?", 3.days.ago)
   end
 
   # recently_updated_products_path
   def recently_updated
-    @products = Product.where("updated_at > ?", 2.days.ago)
+    @products = Product.where("updated_at > created_at").where("updated_at > ?", 3.days.ago)
   end
 
   # on_sale_products_path

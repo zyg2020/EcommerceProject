@@ -4,7 +4,7 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :price, :previous_price, :image,
+  permit_params :name, :description, :price, :previous_price, :image, :created_at, :updated_at,
                 product_categories_attributes: %i[id _destroy product_id category_id]
   #
   # or
@@ -39,6 +39,8 @@ ActiveAdmin.register Product do
       row :categories do |product|
         product.categories.map { |bg| bg.name }.join(", ").html_safe
       end
+      row :created_at
+      row :updated_at
       row :image do |product|
         image_tag product.image if product.image.present?
       end
