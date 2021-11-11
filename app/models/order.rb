@@ -5,5 +5,6 @@ class Order < ApplicationRecord
   has_many :order_products
   has_many :products, through: :order_products
 
-  validates :customer, :status, presence: true
+  validates :customer, :status, :total_tax_rate, :total_paid, presence: true
+  validates :total_tax_rate, :total_paid, numericality: true
 end
