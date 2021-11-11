@@ -22,19 +22,12 @@ class CustomersController < ApplicationController
     # print customer_params
     @customer = Customer.new(customer_params)
 
-    # if @customer.save
-    #   session[:user_id] = @customer.id
-    #   redirect_to "/welcome"
-    # else
-    #   format.html { render :new, status: :unprocessable_entity }
-    #   format.json { render json: @customer.errors, status: :unprocessable_entity }
-    # end
-
     respond_to do |format|
       if @customer.save
         session[:user_id] = @customer.id
         session[:username] = @customer.username
         # redirect_to "/welcome"
+        ModelMailer.new_customer_notification(@customer).deliver
         format.html { redirect_to "/welcome", notice: "Customer was successfully created." }
         # format.html { redirect_to @customer, notice: "Customer was successfully created." }
         # format.json { render :show, status: :created, location: @customer }
