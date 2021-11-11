@@ -1,9 +1,44 @@
       <div>
+        <div class="columns is-multiline m-0">
+            <div class="column auto p-0">
+               <a class="navbar-item p-0 mt-2" href="https://bulma.io">
+                    <img src="https://www.purpicks.com/wp-content/uploads/2018/06/Rejuva-Minerals-Multi-Purpose-Powder-Blush-_-Eye-1.jpg" alt="logo" width="40" height="40" />
+                </a>
+            </div>
+            <div class="column is-two-thirds has-background-white mgt-large mgb-large p-0">
+                <%= form_with(url: search_products_path, method: :get, local: true) do |form| %>
+                    <div class="field is-horizontal mb-0">
+                        <div class="field is-horizontal mb-0">
+                            <%= form.label :name, "Search:", class: "tags is-small m-2" %>
+                            <%=  form.text_field(:name, class: "input is-small m-2", placeholder: "Search For Products")  %>
+                        </div>
+
+                        <%= form.label :category_name, class: "m-2"%>
+                            <%= form.collection_select(:category_name, return_categories , :name, :name, {:include_blank => "All"}, {class: "select is-small m-2" })%>
+
+                        <div class="control mb-0">
+                            <%= form.submit("Search", class: "button is-primary is-small m-2") %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <% if logged_in? %>
+                <h2 class="column auto is-small p-0 mt-2">Hello, <%= current_user.username %></h2>
+            <% end %>
+
+            <div class="column auto p-0 ">
+                <% if logged_in? %>
+
+                    <div class="is-inline"><%= button_to "Sign Out", '/logout', method: :post, class: "is-inline button is-small m-2" %></div>
+                <% else %>
+                    <%= button_to "Login", '/login', method: :get, class: "button is-small m-2"  %>
+                    <%= button_to "Sign Up", '/customers/new', method: :get, class: "button is-primary is-small m-2"  %>
+                <% end %>
+            </div>
+        </div>
+
         <nav class="navbar" role="navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                    <img src="https://www.purpicks.com/wp-content/uploads/2018/06/Rejuva-Minerals-Multi-Purpose-Powder-Blush-_-Eye-1.jpg" alt="logo" width="50" height="50" />
-                </a>
 
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
@@ -45,17 +80,6 @@
 
 
                 <div class="navbar-end">
-                  <div class="navbar-item buttons">
-
-                  <% if logged_in? %>
-                    <h2 class="m-2">Hello, <%= current_user.username %></h2>
-
-                    <%= button_to "Sign Out", '/logout', method: :post, class: "button  ml-2" %>
-                    <% else %>
-                    <%= button_to "Login", '/login', method: :get, class: "button ml-2"  %>
-                    <%= button_to "Sign Up", '/customers/new', method: :get, class: "button is-primary ml-2"  %>
-                    <% end %>
-                    </div>
                 </div>
             </div>
         </nav>

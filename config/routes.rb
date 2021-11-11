@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get "new_products"
       get "on_sale"
       get "recently_updated"
+      get "search"
     end
   end
   resources :orders
