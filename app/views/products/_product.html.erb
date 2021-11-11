@@ -1,0 +1,36 @@
+<div class="column is-one-quarter">
+  <div class="card">
+      <% if product.image.present? %>
+        <div class="card-image" style="height:320px">
+          <figure class="image">
+          <%= image_tag product.image %>
+          </figure>
+        </div>
+      <% else %>
+        <div class="card-image" style="height:320px">
+          <figure class="image">
+          <%= image_tag "/assets/coming_soon.png" %>
+          </figure>
+        </div>
+      <% end %>
+    <div class="card-content">
+      <h3 class="title is-5" style="height:50px">
+          <%= link_to product.name, product %>
+      </h3>
+      <div style="height:50px">
+        <% if product.previous_price.present? %>
+          <h3 style="text-decoration: line-through;">Previous Price:<%= product.previous_price %></h3>
+        <% end %>
+        <h3>Current Price: <%= product.price %></h3>
+      </div>
+    </div>
+    <footer class="card-footer">
+      <p class="card-footer-item">
+        Phone number: <br><%= product.name %>
+      </p>
+      <p class="card-footer-item">
+        Email Address: <br><%= product.name %>
+      </p>
+    </footer>
+  </div>
+</div>
