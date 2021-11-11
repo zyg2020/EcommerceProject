@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :logged_in?
 
-  helper_method :return_provinces, :cms_pages
+  helper_method :return_provinces, :cms_pages, :return_categories
 
   def logged_in?
     !session[:user_id].nil?
@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
 
   def return_provinces
     Province.all
+  end
+
+  def return_categories
+    Category.all
   end
 
   def cms_pages
