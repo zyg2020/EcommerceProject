@@ -4,22 +4,24 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   # products_path
   def index
-    @products = Product.all
+    @products = Product.order(created_at: :desc).page(params[:page])
   end
 
   # new_products_products_path
   def new_products
-    @products = Product.where("created_at > ?", 3.days.ago)
+    @products = Product.where("created_at > ?",
+                              3.days.ago).order(created_at: :desc).page(params[:page])
   end
 
   # recently_updated_products_path
   def recently_updated
-    @products = Product.where("updated_at > created_at").where("updated_at > ?", 3.days.ago)
+    @products = Product.where("updated_at > created_at").where("updated_at > ?",
+                                                               3.days.ago).order(created_at: :desc).page(params[:page])
   end
 
   # on_sale_products_path
   def on_sale
-    @products = Product.where.not(previous_price: nil)
+    @products = Product.where.not(previous_price: nil).order(created_at: :desc).page(params[:page])
   end
 
   # GET /products/1 or /products/1.json

@@ -6,6 +6,7 @@
 </p>
 
 <h3 class="title is-3"><%= pluralize @category.products.count, "Product" %> in category: <%= @category.name %> </h3>
+
 <ul>
   <% @category.products.each do | p| %>
     <li> <%= link_to p.name, p %> </li>

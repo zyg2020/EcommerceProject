@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Products</h1>
-
+<%= page_entries_info @products %>
 <table>
   <thead>
     <tr>
@@ -29,5 +29,7 @@
 </table>
 
 <br>
-
+<div class="box mx-6 px-6">
+  <%= paginate @products %>
+</div>
 <%= link_to 'New Product', new_product_path %>

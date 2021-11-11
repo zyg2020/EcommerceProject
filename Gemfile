@@ -58,3 +58,4 @@ gem 'activeadmin' # Admin Dashboard as a Rails Engine
 gem 'devise'  #Provides username and password authentication libraries
 gem 'image_processing' #ImageMagick
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'kaminari'
