@@ -1,0 +1,53 @@
+<p class="mb-5">
+  Found <%= pluralize @products.count, "Product" %> when searching:
+  <% if params[:name] != "" %>
+    <br>Name: <%= params[:name] %>
+  <% end %>
+  <% if params[:category_name] != "" %>
+    <br>category_name: <%= params[:category_name] %>
+  <% end %>
+</p>
+<%= page_entries_info @products %>
+
+<div class="columns is-multiline is-mobile ">
+ <% @products.each do |product| %>
+        <div class="column is-one-quarter is-centered" style="display: flex">
+    <div class="tile is-vertical is-8 is-info is-gapless">
+        <article class="
+        content
+        notification
+        is-info
+        is-flex
+        is-flex-direction-column
+        is-justify-content-center
+        is-align-content-center
+        is-centered
+      ">
+            <div style="height: 65px">
+                <h5 class="subtitle is-small is-128x128">
+                    <%= link_to product.name, product %>
+                </h5>
+            </div>
+
+            <div>
+                <% if product.image.present? %>
+                                  <%= image_tag product.image,alt: product.name, class: "image is-128x128"%>
+                <% end %>
+            </div>
+
+            <div style="height: 50px">
+                <p>
+                    <%= truncate product.description %>
+                </p>
+            </div>
+        </article>
+    </div>
+</div>
+    <% end %>
+
+</div>
+<% if @products.count == 10 %>
+  <div class="box mx-6 px-6">
+    <%= paginate @products %>
+  </div>
+<% end %>

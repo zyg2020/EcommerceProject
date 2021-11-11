@@ -24,6 +24,23 @@ class ProductsController < ApplicationController
     @products = Product.where.not(previous_price: nil).order(created_at: :desc).page(params[:page])
   end
 
+  def search
+    puts "category_name: " + params[:category_name]
+    puts "name: " + params[:name]
+
+    if params[:category_name].present?
+      products_no_filtered = Product.joins(:categories).where(categories: { name: [params[:category_name]] })
+    else
+      products_no_filtered = Product.all
+    end
+
+    if params[:name] && params[:name] != ""
+      wildcard_search = "%#{params[:name]}%"
+      products_no_filtered = products_no_filtered.where("products.name LIKE ?", wildcard_search)
+    end
+    @products = products_no_filtered.order(created_at: :desc).page(params[:page])
+  end
+
   # GET /products/1 or /products/1.json
   def show; end
 
