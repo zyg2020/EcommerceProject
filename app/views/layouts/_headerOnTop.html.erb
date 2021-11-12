@@ -22,17 +22,14 @@
                     </div>
                 <% end %>
             </div>
-            <% if logged_in? %>
-                <h2 class="column auto is-small p-0 mt-2">Hello, <%= current_user.username %></h2>
-            <% end %>
 
-            <div class="column auto p-0 ">
+            <div class="column auto p-0 " style="display:flex;flex-direction: row">
                 <% if logged_in? %>
-
+                    <h2 class=" is-small p-0 mt-2">Hello, <%= current_user.username %></h2>
                     <div class="is-inline"><%= button_to "Sign Out", '/logout', method: :post, class: "is-inline button is-small m-2" %></div>
                 <% else %>
-                    <%= button_to "Login", '/login', method: :get, class: "button is-small m-2"  %>
-                    <%= button_to "Sign Up", '/customers/new', method: :get, class: "button is-primary is-small m-2"  %>
+                    <div class="is-inline"><%= button_to "Login", '/login', method: :get, class: "button is-small m-2"  %></div>
+                    <div class="is-inline"><%= button_to "Sign Up", '/customers/new', method: :get, class: "button is-primary is-small m-2"  %></div>
                 <% end %>
             </div>
         </div>
@@ -79,8 +76,68 @@
                 </div>
 
 
-                <div class="navbar-end">
+                <div class="navbar-end" style=" margin-right: 150px;">
+                    <div class="navbar-item has-dropdown is-hoverable mr-6">
+                        <div style="width:40, height:60" class="navbar-link">
+                            <%= link_to image_tag("shopping-cart.png", width:40, height:60), root_path, class:"hvr-pulse-grow" %>
+                            <% if cart.present? %>
+                                <sup style="position:relative;left:-8px;top:-13px;background-color:#920de9;border-radius:7px;color:white;font-weight: bold;margin: 0.2rem;padding: 0.2rem 0.3rem;"><%= cart.size %></sup>
+                            <% end %>
+                        </div>
+
+                        <div class="navbar-dropdown">
+                            <% if cart.present? %>
+                                <% cart.each do |product| %>
+                                    <li class="navbar-item">
+                                        <%= product.name %> <%= link_to "Delete" + '➖', cart_path(product), method: :delete, class:"hvr-pulse-grow has-text-danger ml-5" %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
     </div>
+<style>
+    a:hover {
+    background-color: transparent;
+    }
+
+    li{
+        list-style-type: none;
+    }
+
+    /* Pulse Grow */
+@-webkit-keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+@keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+.hvr-pulse-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {
+  -webkit-animation-name: hvr-pulse-grow;
+  animation-name: hvr-pulse-grow;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+}
+</style>

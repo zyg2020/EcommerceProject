@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :provinces
   resources :categories
   resources :pages, except: [:show]
+  resources :cart, only: %i[create destroy]
   get "/pages/:permalink" => "pages#permalink", as: "permalink"
 
   root "sessions#welcome"

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user
-  helper_method :logged_in?
+  before_action :initialize_session
+  helper_method :cart
+  helper_method :logged_in?, :current_user
 
   helper_method :return_provinces, :cms_pages, :return_categories
 
@@ -22,5 +23,16 @@ class ApplicationController < ActionController::Base
 
   def cms_pages
     Page.all
+  end
+
+  def initialize_session
+    # initialize
+    session[:shopping_cart] ||= [] # empty array of product IDs
+  end
+
+  def cart
+    # you can pass an array of ids, and you'll get back a collection!
+    Product.find(session[:shopping_cart])
+    # pass an array of product id's.. get a collection of products!
   end
 end
