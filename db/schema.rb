@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_234407) do
+ActiveRecord::Schema.define(version: 2021_11_12_074922) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_234407) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_salt"
+    t.string "password_hash"
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
 

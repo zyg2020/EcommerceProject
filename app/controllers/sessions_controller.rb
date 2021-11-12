@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     print params
     @customer = Customer.find_by(username: params[:username])
 
-    if @customer && @customer.password == params[:password]   # customer.authenticate(params[:password])
+    if @customer.present? && @customer.authenticate(params[:password])  # customer.authenticate(params[:password])
       session[:user_id] = @customer.id
       redirect_to "/welcome"
     elsif !params[:username].present? || !params[:password].present?
