@@ -24,4 +24,6 @@ class CartController < ApplicationController
     flash[:notice] = "- #{product.name} removed to cart!"
     redirect_to products_path
   end
+
+  def index; end
 end

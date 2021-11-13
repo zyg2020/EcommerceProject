@@ -79,7 +79,7 @@
                 <div class="navbar-end" style=" margin-right: 150px;">
                     <div class="navbar-item has-dropdown is-hoverable mr-6">
                         <div style="width:40, height:60" class="navbar-link">
-                            <%= link_to image_tag("shopping-cart.png", width:40, height:60), root_path, class:"hvr-pulse-grow" %>
+                            <%= link_to image_tag("shopping-cart.png", width:40, height:60), products_in_cart_path, class:"hvr-pulse-grow" %>
                             <% if cart.present? %>
                                 <sup style="position:relative;left:-8px;top:-13px;background-color:#920de9;border-radius:7px;color:white;font-weight: bold;margin: 0.2rem;padding: 0.2rem 0.3rem;"><%= cart.size %></sup>
                             <% end %>

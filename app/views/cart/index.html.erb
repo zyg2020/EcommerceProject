@@ -1,0 +1,60 @@
+<div class="search-results columns is-multiline">
+  <div class="column is-two-thirds">
+    <div class="card" >
+
+      <% if cart.present? %>
+        <% cart.each do |product| %>
+            <div class="card-content" >
+              <div style="display:flex;flex-direction: row; " class="is-align-content-space-between is-justify-content-space-around">
+                      <% if product.image.present? %>
+                          <div class="card-image" >
+                            <figure class="image">
+                            <%= image_tag product.image.variant(resize_to_limit: [300, 300]) %>
+                            </figure>
+                          </div>
+                      <% else %>
+                          <div class="card-image" >
+                            <figure class="image">
+                            <%= image_tag "/assets/coming_soon.png", style: "max-height: 300px; max-width: 300px;" %>
+                            </figure>
+                          </div>
+                      <% end %>
+                        <div style="height:50px">
+                          <h3 class="title is-5" style="height:50px">
+                              <%= link_to product.name, product %>
+                          </h3>
+
+                          <% if product.previous_price.present? %>
+                            <h3 style="text-decoration: line-through;">Previous Price:<%= product.previous_price %></h3>
+                          <% end %>
+                          <h3>Current Price: <%= product.price %></h3>
+                          <div class="mt-6">
+                            <%= link_to "Delete" + '➖', cart_path(product), method: :delete, class:"hvr-pulse-grow button is-danger is-small ml-5" %>
+                          </div>
+                        </div>
+                        <div>
+                          <p class="title is-6" >Quantity</p>
+                          <div>
+                            <input id=<%= product.id %> type="number" min=1 value=1 class="input">
+                          </div>
+                        </div>
+              </div>
+            </div>
+          <% end %>
+
+
+        <% end %>
+
+
+
+    </div>
+  </div>
+
+    <div class="column is-one-third">
+      <div class="card" >
+        asdf
+      </div>
+    </div>
+</div>
+
+

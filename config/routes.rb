@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   post "/logout", to: "sessions#destroy"
   get "/welcome", to: "sessions#welcome"
+
+  get "/products_in_cart", to: "cart#index", as: "products_in_cart"
 end
