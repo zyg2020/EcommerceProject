@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :initialize_session
-  helper_method :cart
+  helper_method :cart, :get_total
   helper_method :logged_in?, :current_user
 
   helper_method :return_provinces, :cms_pages, :return_categories
@@ -28,11 +28,25 @@ class ApplicationController < ActionController::Base
   def initialize_session
     # initialize
     session[:shopping_cart] ||= [] # empty array of product IDs
+    session[:products_quantity] ||= {}
   end
 
   def cart
     # you can pass an array of ids, and you'll get back a collection!
     Product.find(session[:shopping_cart])
     # pass an array of product id's.. get a collection of products!
+  end
+
+  def get_total
+    subtotal = cart.reduce(0) do |sum, product|
+      sum + product.price * session[:products_quantity][product.id.to_s]
+    end
+    tax = 0
+
+    tax += current_user.province.HST * subtotal if current_user.province.HST.present?
+    tax += current_user.province.GST * subtotal if current_user.province.GST.present?
+    tax += current_user.province.PST * subtotal if current_user.province.PST.present?
+
+    subtotal + tax
   end
 end

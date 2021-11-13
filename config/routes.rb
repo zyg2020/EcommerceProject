@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   get "/welcome", to: "sessions#welcome"
 
   get "/products_in_cart", to: "cart#index", as: "products_in_cart"
+  post "/change_quantity", to: "cart#change_quantity",
+                           as: "change_quantity"
 end

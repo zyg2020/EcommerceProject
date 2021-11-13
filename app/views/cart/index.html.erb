@@ -33,9 +33,10 @@
                           </div>
                         </div>
                         <div>
-                          <p class="title is-6" >Quantity</p>
+                          <p class="title is-6" >Quantity: <%= session[:products_quantity][product.id.to_s].to_s %> </p>
                           <div>
-                            <input id=<%= product.id %> type="number" min=1 value=1 class="input">
+                             <%= button_to 'Add', {:controller => "cart", :action => "change_quantity", :product_id => product.id, "add_or_minus"=> "ADD"} , :method=>:post  %>
+                             <%= button_to 'Minus', {:controller => "cart", :action => "change_quantity", :product_id => product.id, "add_or_minus"=> "MINUS"} , :method=>:post  %>
                           </div>
                         </div>
               </div>
@@ -51,10 +52,40 @@
   </div>
 
     <div class="column is-one-third">
-      <div class="card" >
-        asdf
+      <div class="card p-5" >
+        <h2 class="title is-6" >Cart Total (xx Items)</h2>
+        <hr/>
+        <div class="" >
+          <% cart.each do |product| %>
+            <p class="title is-6" ><%= product.name %></p>
+              <div class="has-text-right" >
+                <p class="" ><%= session[:products_quantity][product.id.to_s].to_s %> x <%= number_to_currency product.price %> = <%= number_to_currency(session[:products_quantity][product.id.to_s] * product.price) %> </p>
+              </div>
+          <% end %>
+        </div>
+        <hr/>
+        <div class="has-text-right" >
+              <p class="" ><strong class="title is-6">Sub Total:</strong> <%= number_to_currency cart.reduce(0) {|sum, product| sum + product.price * session[:products_quantity][product.id.to_s] } %> </p>
+              <% if current_user.province.HST.present? %>
+                <p ><strong class="title is-6">HST:</strong> <%= number_to_currency current_user.province.HST * cart.reduce(0) {|sum, product| sum + product.price * session[:products_quantity][product.id.to_s] } %></p>
+              <% end %>
+              <% if current_user.province.GST.present? %>
+                <p ><strong class="title is-6">GST:</strong> <%= number_to_currency current_user.province.GST * cart.reduce(0) {|sum, product| sum + product.price * session[:products_quantity][product.id.to_s] } %></p>
+              <% end %>
+              <% if current_user.province.PST.present? %>
+                <p ><strong class="title is-6">PST:</strong> <%= number_to_currency current_user.province.PST * cart.reduce(0) {|sum, product| sum + product.price * session[:products_quantity][product.id.to_s] }%></p>
+              <% end %>
+        </div>
+        <hr/>
+        <div class="has-text-right" >
+            <p class="title is-6" >Grand Total: <%= number_to_currency get_total %> </p>
+            <%= button_to "Checkout", '/checkout', method: :get, class: "button is-small m-2"  %>
+        </div>
       </div>
     </div>
 </div>
+<script>
 
+
+</script>
 
