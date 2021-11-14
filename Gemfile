@@ -60,3 +60,4 @@ gem 'image_processing' #ImageMagick
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'kaminari'
 gem 'bcrypt', '~> 3.1.7'
+gem 'stripe'

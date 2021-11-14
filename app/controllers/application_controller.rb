@@ -41,6 +41,8 @@ class ApplicationController < ActionController::Base
     subtotal = cart.reduce(0) do |sum, product|
       sum + product.price * session[:products_quantity][product.id.to_s]
     end
+    invoice = {}
+    invoice[:subtotal] = subtotal
     tax = 0
 
     tax += current_user.province.HST * subtotal if current_user.province.HST.present?

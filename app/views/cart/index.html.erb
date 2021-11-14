@@ -79,7 +79,7 @@
         <hr/>
         <div class="has-text-right" >
             <p class="title is-6" >Grand Total: <%= number_to_currency get_total %> </p>
-            <%= button_to "Checkout", '/checkout', method: :get, class: "button is-small m-2"  %>
+            <%= link_to "Checkout", checkout_create_path, method: :post, remote: true, class: "button is-small m-2" %>
         </div>
       </div>
     </div>

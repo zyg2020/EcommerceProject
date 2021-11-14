@@ -34,4 +34,10 @@ Rails.application.routes.draw do
   get "/products_in_cart", to: "cart#index", as: "products_in_cart"
   post "/change_quantity", to: "cart#change_quantity",
                            as: "change_quantity"
+
+  scope "/checkout" do
+    post "create",  to: "checkout#create", as: "checkout_create"
+    get  "success", to: "checkout#success", as: "checkout_success"
+    get  "cancel",  to: "checkout#cancel",  as: "checkout_cancel"
+  end
 end
