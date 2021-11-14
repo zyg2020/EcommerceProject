@@ -8,7 +8,19 @@ class CheckoutController < ApplicationController
       redirect_to root_path
       nil
     end
+    status_new = Status.find_or_create_by(name: "Pending")
 
+    order = Order.new(total_tax_rate: get_total_tax_rate,
+                      total_paid:     get_total)
+    order.customer = current_user
+    order.status = status_new
+
+    if order.save
+      puts "==============" + "New ORder created successfully."
+    else
+      print_errors(order.errors)
+      redirect_to root_path
+    end
     session_info = { payment_method_types: ["card"],
                      success_url:          checkout_success_url + "?session_id={CHECKOUT_SESSION_ID}",
                      cancel_url:           checkout_cancel_url,
@@ -30,7 +42,12 @@ class CheckoutController < ApplicationController
                                          }
                                        }
                                      })
+
+      OrderProduct.create(order: order, product: product,
+                          quantity: session[:products_quantity][product.id.to_s], price: product.price)
     end
+
+    session[:order_id] = order.id
     print session_info
     @session = Stripe::Checkout::Session.create(session_info)
 
@@ -48,6 +65,12 @@ class CheckoutController < ApplicationController
     puts "=========================================================================" + @session.amount_total.to_s
     puts "=========================================================================" + @session.total_details.amount_tax.to_s
     # found in the docs!
+    puts "=========================================================================" + session[:order_id].to_s
+    status_paid = Status.find_or_create_by(name: "Paid")
+    order = Order.find(session[:order_id])
+    order.status = status_paid
+    order.total_paid = @session.amount_total.to_f / 100
+    order.save
   end
 
   def cancel

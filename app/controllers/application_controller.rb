@@ -51,4 +51,14 @@ class ApplicationController < ActionController::Base
 
     subtotal + tax
   end
+
+  def get_total_tax_rate
+    tax = 0.0
+
+    tax += current_user.province.HST if current_user.province.HST.present?
+    tax += current_user.province.GST if current_user.province.GST.present?
+    tax += current_user.province.PST if current_user.province.PST.present?
+
+    tax
+  end
 end

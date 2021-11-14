@@ -53,7 +53,8 @@
 
     <div class="column is-one-third">
       <div class="card p-5" >
-        <h2 class="title is-6" >Cart Total (xx Items)</h2>
+        <% if current_user.present? %>
+            <h2 class="title is-6" >Cart Total (xx Items)</h2>
         <hr/>
         <div class="" >
           <% cart.each do |product| %>
@@ -81,6 +82,10 @@
             <p class="title is-6" >Grand Total: <%= number_to_currency get_total %> </p>
             <%= link_to "Checkout", checkout_create_path, method: :post, remote: true, class: "button is-small m-2" %>
         </div>
+        <% else %>
+          <h2 class="title is-6" style="color:red;">Please register an account to check out the products in your shopping cart.</h2>
+        <% end %>
+
       </div>
     </div>
 </div>
