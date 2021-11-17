@@ -1,8 +1,8 @@
       <div>
         <div class="columns is-multiline m-0">
             <div class="column auto p-0">
-               <a class="navbar-item p-0 mt-2" href="https://bulma.io">
-                    <img src="https://www.purpicks.com/wp-content/uploads/2018/06/Rejuva-Minerals-Multi-Purpose-Powder-Blush-_-Eye-1.jpg" alt="logo" width="40" height="40" />
+               <a class="navbar-item p-0 mt-2" href="/">
+                    <img src="/assets/logo.jpg" alt="logo" width="60" height="60" />
                 </a>
             </div>
             <div class="column is-two-thirds has-background-white mgt-large mgb-large p-0">
@@ -23,9 +23,9 @@
                 <% end %>
             </div>
 
-            <div class="column auto p-0 " style="display:flex;flex-direction: row">
+            <div class="column auto p-0" style="display:flex;flex-direction: row;">
                 <% if logged_in? %>
-                    <h2 class=" is-small p-0 mt-2">Hello, <%= current_user.username %></h2>
+                    <h2 class=" is-small p-0 mt-2" style="white-space: nowrap; ">Hello, <%= current_user.username %></h2>
                     <div class="is-inline"><%= button_to "Sign Out", '/logout', method: :post, class: "is-inline button is-small m-2" %></div>
                 <% else %>
                     <div class="is-inline"><%= button_to "Login", '/login', method: :get, class: "button is-small m-2"  %></div>

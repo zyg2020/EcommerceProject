@@ -70,7 +70,9 @@ class CheckoutController < ApplicationController
     order = Order.find(session[:order_id])
     order.status = status_paid
     order.total_paid = @session.amount_total.to_f / 100
+    order.stripe_payment_id = @payment_intent.payment_method
     order.save
+
     session.delete(:shopping_cart)
     session.delete(:products_quantity)
     session[:shopping_cart] ||= [] # empty array of product IDs

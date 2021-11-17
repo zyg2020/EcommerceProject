@@ -25,5 +25,7 @@ class SessionsController < ApplicationController
     redirect_to "/welcome"
   end
 
-  def welcome; end
+  def welcome
+    redirect_to "/products/on_sale"
+  end
 end

@@ -1,10 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
-
 <h3 class="title is-3"><%= pluralize @category.products.count, "Product" %> in category: <%= @category.name %> </h3>
 
 <%= page_entries_info @products %>
@@ -20,5 +15,3 @@
   </div>
 <% end %>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>

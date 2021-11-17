@@ -14,15 +14,17 @@
   </head>
 
   <body>
-    <div class="mx-6">
-          <div class="mx-6">
-      <%= render "layouts/headerOnTop" %>
+    <div class="mx-2 mb-6">
+
+        <div class="mb-6">
+          <%= render "layouts/headerOnTop" %>
+        </div>
         <% if flash[:notice] %>
           <p><%= flash[:notice] %></p>
         <% end %>
 
         <%= yield %>
-      </div>
     </div>
+
   </body>
 </html>
