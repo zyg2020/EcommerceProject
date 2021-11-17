@@ -71,6 +71,10 @@ class CheckoutController < ApplicationController
     order.status = status_paid
     order.total_paid = @session.amount_total.to_f / 100
     order.save
+    session.delete(:shopping_cart)
+    session.delete(:products_quantity)
+    session[:shopping_cart] ||= [] # empty array of product IDs
+    session[:products_quantity] ||= {}
   end
 
   def cancel

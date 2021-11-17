@@ -1,0 +1,41 @@
+    <div class="column is-one-third">
+      <div class="card p-5" >
+        <% if current_user.present? %>
+            <h2 class="title is-6" ><%= link_to 'Order Details', order %></h2>
+            <p class="title is-6" >Date: <%= order.created_at %></p>
+            <p class="title is-6" >Status: <%= order.status.name %></p>
+        <hr/>
+        <div class="" >
+          <% order.order_products .each do |order_product| %>
+          <div
+          <% if order_product.product.image.present? %>
+          style="height:100px"
+          <% end %>
+          >
+            <% if order_product.product.image.present? %>
+              <figure class="image mr-3" style="width:100px;height:100px;float:left;">
+                <%= image_tag order_product.product.image, width: "200", height: "200" %>
+              </figure>
+            <% end %>
+            <p class="title is-6" ><%= link_to order_product.product.name, order_product.product %></p>
+              <div class="has-text-right" >
+                <p class="" ><%= order_product.quantity %> x <%= number_to_currency order_product.price %> = <%= number_to_currency(order_product.quantity * order_product.price) %> </p>
+              </div>
+          </div>
+            <hr/>
+          <% end %>
+        </div>
+        <div class="has-text-right" >
+              <p class="" ><strong class="title is-6">Sub Total:</strong> <%= number_to_currency order.order_products.reduce(0) {|sum, order_products| sum + order_products.price * order_products.quantity } %> </p>
+              <p ><strong class="title is-6">Tax(<%= number_to_percentage order.total_tax_rate*100 , precision: 0%>):</strong> <%= number_to_currency order.total_tax_rate * order.order_products.reduce(0) {|sum, order_products| sum + order_products.price * order_products.quantity} %></p>
+        </div>
+        <hr/>
+        <div class="has-text-right" >
+            <p class="title is-6" >Total: <%= number_to_currency order.total_paid %> </p>
+        </div>
+        <% else %>
+          <h2 class="title is-6" style="color:red;">Please Log in to see your past orders.</h2>
+        <% end %>
+
+      </div>
+    </div>

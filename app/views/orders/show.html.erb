@@ -1,19 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Customer:</strong>
-  <%= @order.customer_id %>
-</p>
+<div class="columns is-mobile is-centered">
+    <div class="column is-one-third">
+      <div class="card p-5" >
 
-<p>
-  <strong>Status:</strong>
-  <%= @order.status_id %>
-</p>
+      <p>
+        <strong>Shipping Address:</strong>
+      </p>
 
-<p>
-  <strong>Province tax rate:</strong>
-  <%= @order.province_tax_rate %>
-</p>
+      <p>
+        <%= @order.customer.first_name + @order.customer.last_name %><br>
+        <%=  @order.customer.address %><br>
+        <%= @order.customer.city + ", " + @order.customer.province.name + " " + @order.customer.postal_code %><br>
+        <%=  @order.customer.country%>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="columns is-mobile is-centered">
+  <%= render partial: 'orders/order',
+            object: @order %>
+</div>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

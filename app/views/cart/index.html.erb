@@ -29,14 +29,14 @@
                           <% end %>
                           <h3>Current Price: <%= product.price %></h3>
                           <div class="mt-6">
-                            <%= link_to "Delete" + '➖', cart_path(product), method: :delete, class:"hvr-pulse-grow button is-danger is-small ml-5" %>
+                            <%= link_to "Delete", cart_path(product), method: :delete, class:"hvr-pulse-grow button is-danger is-small ml-5" %>
                           </div>
                         </div>
                         <div>
                           <p class="title is-6" >Quantity: <%= session[:products_quantity][product.id.to_s].to_s %> </p>
                           <div>
-                             <%= button_to 'Add', {:controller => "cart", :action => "change_quantity", :product_id => product.id, "add_or_minus"=> "ADD"} , :method=>:post  %>
-                             <%= button_to 'Minus', {:controller => "cart", :action => "change_quantity", :product_id => product.id, "add_or_minus"=> "MINUS"} , :method=>:post  %>
+                             <%= button_to 'Add', {:controller => "cart", :action => "change_quantity", :product_id => product.id, "add_or_minus"=> "ADD"} , :method=>:post, class:"button is-small px-4 mb-5"  %>
+                             <%= button_to 'Minus', {:controller => "cart", :action => "change_quantity", :product_id => product.id, "add_or_minus"=> "MINUS"} , :method=>:post, class:"button is-small"   %>
                           </div>
                         </div>
               </div>

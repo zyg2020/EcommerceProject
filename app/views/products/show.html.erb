@@ -1,34 +1,71 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<p class="title is-5" >
   <%= @product.name %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Previous price:</strong>
-  <%= @product.previous_price %>
-</p>
-
-    <% if @product.image.present? %>
-    <p>IMAGE! 📸</p>
-      <div class="card-image">
-        <figure class="image">
-        <%= image_tag @product.image %>
-        </figure>
+<div class="columns is-centered" >
+  <div class="column is-half">
+    <div class="card" >
+        <% if @product.image.present? %>
+          <div class="card-image" >
+            <figure class="image">
+            <%= image_tag @product.image%>
+            </figure>
+          </div>
+        <% else %>
+          <div class="card-image" >
+            <figure class="image">
+            <%= image_tag "/assets/coming_soon.png"%>
+            </figure>
+          </div>
+        <% end %>
+      <div class="card-content">
+        <h3 class="title is-5" style="height:50px">
+            <%= link_to @product.name, @product %>
+        </h3>
+        <div style="height:50px">
+          <% if @product.previous_price.present? %>
+            <h3 style="text-decoration: line-through;">Previous Price:<%= @product.previous_price %></h3>
+          <% end %>
+          <h3>Current Price: <%= @product.price %></h3>
+        </div>
       </div>
-    <% end %>
+      <footer class="card-footer">
 
+            <% @product.categories.each do |category| %>
+              <div class="notification is-success card-footer-item p-1 m-2" style="width:50px;">
+                <%= link_to category.name, category, class:"is-small" %>
+              </div>
+            <% end %>
 
+          <div class="notification is-info card-footer-item p-1 m-2" style="height:35px;">
+            <% if cart.include?(@product) %>
+              <%= button_to cart_path(@product), class:"button is-small m-0 p-0 is-info", method: :delete do %>
+                Remove From Cart
+              <% end %>
+            <% else %>
+              <%= form_with  url: cart_index_path, method: :post do %>
+                <%= hidden_field_tag(:id, @product.id) %>
+                <%= button_tag 'Add to Cart', class:"button is-small m-0 p-0 is-info" %>
+              <% end %>
+            <% end %>
+          </div>
+      </footer>
+    </div>
+  </div>
+
+  <div class="column is-half">
+    <div class="card" >
+      <div class="card-content">
+        <h3 class="title is-5">Product Description</h3>
+        <p>
+          <%= @product.description %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

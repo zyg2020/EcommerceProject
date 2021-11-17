@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_one_attached :image
 
-  has_many :product_categories
+  has_many :product_categories, dependent: :delete_all
   has_many :categories, through: :product_categories
 
   has_many :order_products
