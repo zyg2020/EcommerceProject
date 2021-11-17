@@ -11,13 +11,13 @@
         <% if @product.image.present? %>
           <div class="card-image" >
             <figure class="image">
-            <%= image_tag @product.image%>
+            <%= image_tag @product.image, alt:@product.name %>
             </figure>
           </div>
         <% else %>
           <div class="card-image" >
             <figure class="image">
-            <%= image_tag "/assets/coming_soon.png"%>
+            <%= image_tag "/assets/coming_soon.png", alt:"Image coming soon" %>
             </figure>
           </div>
         <% end %>
@@ -67,5 +67,3 @@
     </div>
   </div>
 </div>
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>

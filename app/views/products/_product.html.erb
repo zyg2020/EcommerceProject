@@ -3,13 +3,13 @@
       <% if product.image.present? %>
         <div class="card-image" >
           <figure class="image">
-          <%= image_tag product.image, width: "600", height: "600" %>
+          <%= image_tag product.image, alt:product.name, width: "600", height: "600" %>
           </figure>
         </div>
       <% else %>
         <div class="card-image" >
           <figure class="image">
-          <%= image_tag "/assets/coming_soon.png", width: "600", height: "600" %>
+          <%= image_tag "/assets/coming_soon.png", alt:"Image coming soon", width: "600", height: "600" %>
           </figure>
         </div>
       <% end %>
@@ -39,7 +39,7 @@
             <% end %>
           <% else %>
             <%= form_with  url: cart_index_path, method: :post do %>
-              <%= hidden_field_tag(:id, product.id) %>
+              <%= hidden_field_tag(:id, product.id, {id:product.id}) %>
               <%= button_tag 'Add to Cart', class:"button is-small m-0 p-0 is-info" %>
             <% end %>
           <% end %>

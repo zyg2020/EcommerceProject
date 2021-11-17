@@ -1,11 +1,24 @@
-<h1>Login</h1>
-<% if @error.present? %>
-  <h2><%= @error %></h2>
-<% end %>
-<%= form_tag '/login' do %>
-<%= label_tag :username%>
-<%= text_field_tag :username %>
-<%= label_tag :password%>
-<%= password_field_tag :password%>
-<%= submit_tag "Login"%>
-<%end%>
+
+<div class="columns is-centered" >
+  <div class="column is-half">
+    <div class="card" >
+      <div class="card-content">
+        <h1 class="title" >Login</h1>
+        <% if @error.present? %>
+          <h2><%= @error %></h2>
+        <% end %>
+        <%= form_tag '/login' do %>
+        <%= label_tag :username%>
+        <%= text_field_tag :username %>
+        <%= label_tag :password%>
+        <%= password_field_tag :password%>
+        <%= submit_tag "Login", class:"button is-small" %>
+        <%end%>
+      </div>
+      <footer class="card-footer">
+
+      </footer>
+    </div>
+  </div>
+</div>
+

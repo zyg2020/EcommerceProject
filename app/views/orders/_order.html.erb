@@ -14,7 +14,7 @@
           >
             <% if order_product.product.image.present? %>
               <figure class="image mr-3" style="width:100px;height:100px;float:left;">
-                <%= image_tag order_product.product.image, width: "200", height: "200" %>
+                <%= image_tag order_product.product.image, alt:order_product.product.name, width: "200", height: "200" %>
               </figure>
             <% end %>
             <p class="title is-6" ><%= link_to order_product.product.name, order_product.product %></p>

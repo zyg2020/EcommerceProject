@@ -2,7 +2,7 @@
 
 <h3 class="title is-3"><%= pluralize @category.products.count, "Product" %> in category: <%= @category.name %> </h3>
 
-<%= page_entries_info @products %>
+<h2 class="title is-6"><%= page_entries_info @products %></h2>
 
 <div class="search-results columns is-multiline">
   <%= render partial: 'products/product',
